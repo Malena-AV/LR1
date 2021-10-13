@@ -23,7 +23,7 @@ namespace ConsoleAppлр1
         }
         public double Delenye ()
         {
-            return (double) (ch) / (zn);
+            return (double) (ch) / zn;
         }
         public static Drobe operator + (Drobe x, Drobe y)
         {
@@ -41,19 +41,27 @@ namespace ConsoleAppлр1
         {
             return new Drobe(x.ch *y.zn, x.zn*y.ch);
         }
-
-
+        public static void GetZnak(Drobe a)
+        {
+            if (a.ch * a.zn >= 0)
+            {
+                Console.WriteLine("+");
+            }
+            else
+            {
+                Console.WriteLine("-");
+            }
+        }
     }
 
     class Program
     {
         static void Main(string[] args)
         {
-            Drobe drobe1 = new Drobe();
-            Drobe drobe2 = new Drobe();
-            double cumma = drobe1 + drobe2;
-            Console.WriteLine(cumma);
-
+            Drobe drobe1 = new Drobe(-1,2);
+            Drobe drobe2 = new Drobe(3,4);
+            Drobe.GetZnak(drobe1);
+            Drobe.GetZnak(drobe2);
         }
     }
 }
