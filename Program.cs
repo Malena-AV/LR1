@@ -4,8 +4,15 @@ namespace ConsoleAppлр1
 {
     class Drobe
     {
-       int ch;
-       int zn;
+        int ch;
+        int zn;
+        public delegate void Delegat(Drobe a, int b);
+        public event Delegat MyEvent;
+        public int Ch
+        {
+            get { return ch; }
+            set { MyEvent(this, value); ch = value; }
+        }
         public Drobe(int x, int y)
         {
             this.ch = x;
@@ -75,6 +82,13 @@ namespace ConsoleAppлр1
             Console.WriteLine(drobe2[1]);
             Console.WriteLine("Операция с дробями: ");
             Drobe.GetDrobe(drobe1 - drobe2);
+            drobe1.MyEvent += MyMetod;
+            drobe1.Ch = 15;
+            Drobe.GetDrobe(drobe1);
+        }
+        public static void MyMetod(Drobe a, int b)
+        {
+            Console.WriteLine("изменилась: ");
         }
     }
 }
