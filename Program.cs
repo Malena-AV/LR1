@@ -6,13 +6,6 @@ namespace ConsoleAppлр1
     {
         int ch;
         int zn;
-        public delegate void Delegat(Drobe a, int b);
-        public event Delegat MyEvent;
-        public int Ch
-        {
-            get { return ch; }
-            set { MyEvent(this, value); ch = value; }
-        }
         public Drobe(int x, int y)
         {
             this.ch = x;
@@ -48,24 +41,33 @@ namespace ConsoleAppлр1
         {
             return new Drobe(x.ch *y.zn, x.zn*y.ch);
         }
-        public static void GetDrobe(Drobe a)
+        public string GetZnak()
         {
-            Console.WriteLine(a.ch + "/" + a.zn);
-        }
-        public static void GetZnak(Drobe a)
-        {
-            if (a.ch * a.zn >= 0)
+            if (ch * zn >= 0)
             {
-                Console.WriteLine("+");
+                return "+";
             }
             else
             {
-                Console.WriteLine("-");
+                return "-";
             }
         }
         public int this [int index]
         {
             get { return (index == 0) ? ch : zn; }
+        }
+        public delegate void Delegat(Drobe a, int b);
+        public event Delegat MyEventCh;
+        public event Delegat MyEventZn;
+        public int Ch
+        {
+            get { return ch; }
+            set { MyEventCh(this, value); ch = value; }
+        }
+        public int Zn
+        {
+            get { return zn; }
+            set { MyEventZn(this, value); zn = value; }
         }
     }
     class Program
@@ -73,22 +75,28 @@ namespace ConsoleAppлр1
         static void Main(string[] args)
         {
             Drobe drobe1 = new Drobe(-1,2);
-            Drobe drobe2 = new Drobe(3,4);
-            Console.WriteLine("Знак дроби drobe1: ");
-            Drobe.GetZnak(drobe1);
-            Console.WriteLine("Знак дроби drobe2: ");
-            Drobe.GetZnak(drobe2);
-            Console.WriteLine("Вызов по индексу: ");
-            Console.WriteLine(drobe2[1]);
-            Console.WriteLine("Операция с дробями: ");
-            Drobe.GetDrobe(drobe1 - drobe2);
-            drobe1.MyEvent += MyMetod;
+            Drobe drobe2 = new Drobe(3,4,7);
+            Console.WriteLine(drobe1.GetZnak());
+            drobe1.MyEventCh += MyMetod;
+            drobe1.MyEventZn += MyMetod1;
             drobe1.Ch = 15;
-            Drobe.GetDrobe(drobe1);
+            drobe1.Zn = 110;
+            Drobe drobe3 = new Drobe(10);
+            Console.WriteLine("+: "+ (drobe1 + drobe2)[0] + "/" + (drobe1 + drobe2)[1]);
+            Console.WriteLine("-: " + (drobe1 - drobe2)[0] + "/" + (drobe1 - drobe2)[1]);
+            Console.WriteLine("*: " + (drobe1 * drobe2)[0] + "/" + (drobe1 * drobe2)[1]);
+            Console.WriteLine("/: " + (drobe1 / drobe2)[0] + "/" + (drobe1 / drobe2)[1]);
+            Console.WriteLine(drobe2.Delenye()); 
+            Console.WriteLine(drobe1[0]+"/"+drobe1[1]);
+            Console.ReadKey();
         }
         public static void MyMetod(Drobe a, int b)
         {
-            Console.WriteLine("изменилась: ");
+            Console.WriteLine("изменился числитель");
         }
-    }
+        public static void MyMetod1(Drobe a, int b)
+        {
+            Console.WriteLine("изменился знаменатель");
+        }
+    } 
 }
