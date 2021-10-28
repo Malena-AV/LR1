@@ -82,12 +82,13 @@ namespace ConsoleAppлр1
             drobe1.Ch = 15;
             drobe1.Zn = 110;
             Drobe drobe3 = new Drobe(10);
-            Console.WriteLine("+: "+ (drobe1 + drobe2)[0] + "/" + (drobe1 + drobe2)[1]);
+            Console.WriteLine("+: " + (drobe1 + drobe2)[0] + "/" + (drobe1 + drobe2)[1]);
             Console.WriteLine("-: " + (drobe1 - drobe2)[0] + "/" + (drobe1 - drobe2)[1]);
             Console.WriteLine("*: " + (drobe1 * drobe2)[0] + "/" + (drobe1 * drobe2)[1]);
             Console.WriteLine("/: " + (drobe1 / drobe2)[0] + "/" + (drobe1 / drobe2)[1]);
             Console.WriteLine(drobe2.Delenye()); 
             Console.WriteLine(drobe1[0]+"/"+drobe1[1]);
+            Console.WriteLine(drobe1.Ch + "/" + drobe1.Zn);
             Console.ReadKey();
         }
         public static void MyMetod(Drobe a, int b)
